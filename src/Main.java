@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -10,5 +11,10 @@ public class Main {
         integerList.add(3);
         integerList.add(4);
         System.out.println(integerList.indexOf(4));
+
+        Iterator<Integer> iterator = integerList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }
