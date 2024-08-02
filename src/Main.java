@@ -1,10 +1,9 @@
+import overrideMethods.Person;
 import streams.StreamsFun;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,6 +25,22 @@ public class Main {
         StreamsFun streamsFun = new StreamsFun();
 //        streamsFun.useConsumerInterface();
         streamsFun.useStreamsInterface();
-        HashMap<Integer, String> hmap = new HashMap<>();
+        Person person1 = new Person(1, "Ritik", 27);
+        Person person2 = new Person(2, "Naman", 30);
+        Person person3 = new Person(1, "Ritik", 27);
+
+        System.out.println(person1.toString());
+        System.out.println(person2.toString());
+        System.out.println(person3.toString());
+
+        System.out.println(person1.equals(person2));
+        System.out.println(person1.equals(person3));
+
+        int person1HashCode = person1.hashCode();
+        int person2HashCode = person2.hashCode();
+        int person3HashCode = person3.hashCode();
+
+        System.out.println(person1HashCode == person2HashCode);
+        System.out.println(person1HashCode == person3HashCode);
     }
 }
