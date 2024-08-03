@@ -1,3 +1,4 @@
+import multiThreading.NumberPrinter;
 import overrideMethods.Person;
 import streams.StreamsFun;
 
@@ -24,7 +25,7 @@ public class Main {
 //        System.out.println(nums);
         StreamsFun streamsFun = new StreamsFun();
 //        streamsFun.useConsumerInterface();
-        streamsFun.useStreamsInterface();
+        /*streamsFun.useStreamsInterface();
         Person person1 = new Person(1, "Ritik", 27);
         Person person2 = new Person(2, "Naman", 30);
         Person person3 = new Person(1, "Ritik", 27);
@@ -41,6 +42,15 @@ public class Main {
         int person3HashCode = person3.hashCode();
 
         System.out.println(person1HashCode == person2HashCode);
-        System.out.println(person1HashCode == person3HashCode);
+        System.out.println(person1HashCode == person3HashCode);*/
+
+        /**
+         * Implementing multi-threading
+         */
+        NumberPrinter numberPrinter = new NumberPrinter(5);
+        Thread t1 = new Thread(numberPrinter);
+        t1.start();
+        Thread t2 = new Thread(numberPrinter);
+        t2.start();
     }
 }

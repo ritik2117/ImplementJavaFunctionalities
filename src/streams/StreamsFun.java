@@ -24,6 +24,7 @@ public class StreamsFun {
         Stream<Integer> stream3 = stream2.map(n -> n * 2);
         Integer result = stream3.reduce(1, (a,b) -> a + b);
 //        stream3.forEach(n -> System.out.println(n));
+
         System.out.println(result);
     }
 }
