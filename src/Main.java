@@ -1,10 +1,11 @@
-import multiThreading.NumberPrinter;
-import overrideMethods.Person;
+import multiThreading.NumberPrinterCallable;
+import multiThreading.NumberPrinterRunnable;
 import streams.StreamsFun;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -47,10 +48,62 @@ public class Main {
         /**
          * Implementing multi-threading
          */
-        NumberPrinter numberPrinter = new NumberPrinter(5);
+        /*NumberPrinter numberPrinter = new NumberPrinter(5);
         Thread t1 = new Thread(numberPrinter);
         t1.start();
         Thread t2 = new Thread(numberPrinter);
-        t2.start();
+        t2.start();*/
+//        Create a thread pool with a fixed number of threads
+        ExecutorService executorService = Executors.newFixedThreadPool(10);
+//        Submit Runnable tasks
+        for (int i=1; i<=10; i++) {
+            Future<Integer> future = (Future<Integer>) executorService.submit(new NumberPrinterRunnable(i));
+            /**
+             * No need of the below code and also of the getting the result in future as
+             *  The run method does not return any result and cannot throw a checked exception.
+             */
+            /*try {
+                Integer result = future.get();
+                System.out.println("Result of Runnable task: " + result);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }*/
+        }
+//        Shut down the executor service after all tasks are submitted
+//        executorService.shutdown();
+
+//        Submit Callable tasks
+        /*Callable<Integer> callable = (Integer num) -> {
+            System.out.println("Callable Task " + num + " is running on Thread " + Thread.currentThread().getId());
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return num*2;
+        };*/
+        for (int i=1; i<=10; i++) {
+            Future<Integer> future = executorService.submit(new NumberPrinterCallable(i));
+            try {
+                Integer result = future.get();
+                System.out.println("Result of Callable task: " + result);
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+
+        executorService.shutdown();
+
+        try {
+//            Wait for the previously submitted tasks to complete
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+//            Force shutdown if interrupted during wait
+            executorService.shutdownNow();
+        }
+
+        System.out.println("Executor service has been shut down.");
     }
 }
