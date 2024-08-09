@@ -1,15 +1,32 @@
 import multiThreading.NumberPrinterCallable;
 import multiThreading.NumberPrinterRunnable;
 import streams.StreamsFun;
+import streams.Student;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
 //        System.out.println("Hello world!");
+        /*int[] numbers = new int[5];
+        for (int i = 0; i <= numbers.length; i++)
+        {
+            numbers[i] = i * 2;
+        }
+        System.out.println(Arrays.toString(numbers));*/
+        /*try {
+            int i=9/0;
+            System.out.println(i);
+            return;
+        } catch (Exception e) {
+            System.out.println("exception caught");
+//            return;
+        }
+        System.out.println("task completed");*/
         List<Integer> integerList = new ArrayList<>();
         integerList.add(1);
         integerList.add(2);
