@@ -21,6 +21,14 @@ public class Student {
         this.score = score;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     public int getScore() {
         return score;
     }
@@ -48,7 +56,13 @@ public class Student {
 
         Consumer<Integer> integerConsumer = (n) -> System.out.println(n);
 
-        Function<Student, Integer> integerFunction = (Student student) -> student.getScore();
+        Function<Student, Integer> integerFunction = new Function<Student, Integer>() {
+            @Override
+            public Integer apply(Student student) {
+                return student.getScore();
+            }
+        };
+
         Comparator<Integer> integerComparator = new Comparator<Integer>() {
             @Override
             public int compare(Integer n1, Integer n2) {
@@ -63,8 +77,17 @@ public class Student {
         Optional<Integer> maxScore = sortedScoresSkippedTop.findFirst();
         maxScore.ifPresent((n) -> System.out.println(n));
 
-//        Stream<> mappedStudentScores = studentStreams.map(Student student, Integer score) {
-//            return;
-//        }
+        /**
+         * Additional Questions:
+         * Get the first Character of all the Names of the student and
+         * return the result in form of a stream.
+         *
+         * Achieve this by using the map function in the stream
+         * to transform each student's name into its first character
+         * and return the result as a stream.
+         */
+
+        Stream<Character> studentNameFirstChar = students.stream().map((Student student) -> student.getName().charAt(0));
+        studentNameFirstChar.forEach(System.out::println);
     }
 }
