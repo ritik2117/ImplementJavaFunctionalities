@@ -1,6 +1,5 @@
 package multiThreading.sync;
 
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,14 +15,17 @@ import java.util.concurrent.locks.ReentrantLock;
 class SharedResource {
     private final Lock lock = new ReentrantLock();
 
-    public void criticalSection(int n, AtomicInteger count) {
+    public void criticalSection(int n, Integer count) {
         lock.lock();
         try {
             if (n % 2 == 0) {
-                count.incrementAndGet();
+                System.out.println("Incrementing count...");
+                count++;
                 Thread.sleep(1000);
             } else {
-                count.decrementAndGet();
+//                count.decrementAndGet();
+                System.out.println("Decrementing count...");
+                count--;
                 Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
@@ -44,7 +46,8 @@ public class LockMechanism {
          * Thread Safety: Ensures that multiple threads can safely update the integer value without causing data races.
          * Non-blocking: Uses low-level atomic machine instructions to perform operations, which can be more efficient than using locks.
          */
-        AtomicInteger count = new AtomicInteger(0);
+//        AtomicInteger count = new AtomicInteger(0);
+        Integer count = 0;
         for (int i = 0; i < 1; i++) {
             int n = i;
             new Thread(() -> new SharedResource().criticalSection(n, count))
