@@ -22,5 +22,12 @@ public class UsingThreadClass {
          * Directly calling run() would execute the method on the main thread, not on a separate thread.
          */
         t1.start();
+        /**
+         * Printing no 1 to 10 each on a separate thread.
+         */
+        for (int i = 0; i < 10; i++) {
+            Thread t = new Thread(() -> System.out.println("Thread is running..." + Thread.currentThread().getId()));
+            t.start();
+        }
     }
 }
