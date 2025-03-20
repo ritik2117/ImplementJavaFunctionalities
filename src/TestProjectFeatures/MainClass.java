@@ -2,6 +2,7 @@ package TestProjectFeatures;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class MainClass {
     public static void main(String[] args) {
@@ -23,10 +24,16 @@ public class MainClass {
         String[] qualifiedNameSplit = qualifiedName.split("\\.");
         System.out.println(Arrays.toString(qualifiedNameSplit));
 
-        if (Optional.of(null) == null) {
+        if (Optional.ofNullable(null) == Optional.empty()) {
             System.out.println("null");
         } else {
             System.out.println("not null");
         }
+
+//        Test input validity of enum values
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        TestOnEnum testOnEnum = new TestOnEnum();
+        testOnEnum.checkInputValidity(TestEnum.valueOf(input));
     }
 }
