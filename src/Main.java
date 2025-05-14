@@ -71,21 +71,21 @@ public class Main {
         Thread t2 = new Thread(numberPrinter);
         t2.start();*/
 //        Create a thread pool with a fixed number of threads
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+//        ExecutorService executorService = Executors.newFixedThreadPool(10);
 //        Submit Runnable tasks
-        for (int i=1; i<=10; i++) {
+        /*for (int i=1; i<=10; i++) {
             Future<Integer> future = (Future<Integer>) executorService.submit(new NumberPrinterRunnable(i));
-            /**
+            *//**
              * No need of the below code and also of the getting the result in future as
              *  The run method does not return any result and cannot throw a checked exception.
-             */
-            /*try {
+             *//*
+            *//*try {
                 Integer result = future.get();
                 System.out.println("Result of Runnable task: " + result);
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
-            }*/
-        }
+            }*//*
+        }*/
 //        Shut down the executor service after all tasks are submitted
 //        executorService.shutdown();
 
@@ -99,7 +99,7 @@ public class Main {
             }
             return num*2;
         };*/
-        for (int i=1; i<=10; i++) {
+        /*for (int i=1; i<=10; i++) {
             Future<Integer> future = executorService.submit(new NumberPrinterCallable(i));
             try {
                 Integer result = future.get();
@@ -121,6 +121,17 @@ public class Main {
             executorService.shutdownNow();
         }
 
-        System.out.println("Executor service has been shut down.");
+        System.out.println("Executor service has been shut down.");*/
+
+//        String pool
+        String s1 = "Hello";
+        String s2 = "Hello";
+        String s3 = new String("Hello");
+        String s4 = new String("Hello").intern();
+
+        System.out.println(s1 == s2); // true (both refer to the same object in the string pool)
+        System.out.println(s1 == s3); // false (s1 is in the pool, s3 is in the heap)
+        System.out.println(s1 == s4); // true (both refer to the same object in the string pool)
+        System.out.println(s1.equals(s3)); // true (content is the same)
     }
 }
