@@ -124,7 +124,7 @@ public class Main {
         System.out.println("Executor service has been shut down.");*/
 
 //        String pool
-        /*String s1 = "Hello";
+        String s1 = "Hello";
         String s2 = "Hello";
         String s3 = new String("Hello");
         String s4 = new String("Hello").intern();
@@ -132,7 +132,6 @@ public class Main {
         System.out.println(s1 == s2); // true (both refer to the same object in the string pool)
         System.out.println(s1 == s3); // false (s1 is in the pool, s3 is in the heap)
         System.out.println(s1 == s4); // true (both refer to the same object in the string pool)
-        System.out.println(s1.equals(s3)); // true (content is the same)*/
-
+        System.out.println(s1.equals(s3)); // true (content is the same)
     }
 }
